@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".userinterface.account.AccountFragment"
+    tools:showIn="@layout/activity_account">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/header2"
+        android:id="@+id/image_view_header"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitXY"
+        android:layout_height="160dp" />
+
+    <ImageView
+        android:layout_width="60dp"
+        app:srcCompat="@drawable/profilpic"
+        android:layout_marginTop="27dp"
+        android:id="@+id/image_view_account_logo"
+        android:layout_height="60dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:id="@+id/textView"
+        android:textColor="@color/icons"
+        android:layout_below="@+id/image_view_account_logo"
+        android:layout_alignLeft="@+id/image_view_account_logo"
+        android:layout_alignStart="@+id/image_view_account_logo" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/image_view_header">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <ImageButton
+                app:srcCompat="@drawable/user"
+                android:id="@+id/image_button_change_name"
+                android:scaleType="fitXY"
+                android:background="@color/transparent"
+                android:layout_height="40dp"
+                android:layout_width="40dp" />
+
+            <TextView
+                android:text="@string/change_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_change_name"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <ImageButton
+                app:srcCompat="@drawable/mail"
+                android:id="@+id/image_button_change_email"
+                android:scaleType="fitXY"
+                android:background="@color/transparent"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
+
+            <TextView
+                android:text="@string/change_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_change_email"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <ImageButton
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/lock"
+                android:id="@+id/image_button_change_password"
+                android:scaleType="fitXY"
+                android:background="@color/transparent"
+                android:layout_width="40dp" />
+
+            <TextView
+                android:text="@string/change_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_change_password"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp" />
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

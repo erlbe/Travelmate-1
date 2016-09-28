@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_padding_tiny"
+    android:paddingLeft="@dimen/margin_padding_tiny"
+    android:paddingRight="@dimen/margin_padding_tiny"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.telematica.travelmate.userinterface.entryadd.AddEntryActivity"
+    tools:showIn="@layout/activity_add_entry">
+
+
+    <EditText
+        android:id="@+id/edit_text_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_action_folder_open"
+        android:focusable="false"
+        android:fontFamily="sans-serif"
+        android:hint="@string/category"
+        android:textSize="@dimen/text_size_xnormal"/>
+
+    <EditText
+        android:id="@+id/edit_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:hint="@string/title"
+        android:paddingTop="@dimen/margin_padding_tiny"
+        android:textSize="@dimen/text_size_xnormal"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/edit_text_entry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_padding_tiny"
+        android:background="#00000000"
+        android:gravity="left|top"
+        android:hint="@string/placeholder_entry_text"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp"
+        android:scrollbars="none"
+        android:textSize="@dimen/text_size_normal"/>
+
+
+</LinearLayout>
