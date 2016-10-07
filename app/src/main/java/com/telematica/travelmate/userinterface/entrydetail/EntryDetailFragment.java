@@ -128,6 +128,8 @@ public class EntryDetailFragment extends Fragment implements EntryDetailContract
         mCategory.setText(entry.getCategoryName());
         mContent.setText(entry.getContent());
         mTitle.setText(entry.getTitle());
+        mCategory.setTextColor(Color.BLACK);
+        mContent.setTextColor(Color.BLACK);
         if (entry.getColor() != 0){
             mCategory.setBackgroundColor(entry.getColor());
             mCategory.setTextColor(Color.BLACK);

@@ -22,8 +22,8 @@
 
     <ImageView
         android:layout_width="60dp"
-        app:srcCompat="@drawable/profilpic"
-        android:layout_marginTop="27dp"
+        app:srcCompat="@drawable/appsymbol"
+        android:layout_marginTop="40dp"
         android:id="@+id/image_view_account_logo"
         android:layout_height="60dp"
         android:scaleType="fitXY"
@@ -34,7 +34,8 @@
         android:text="@string/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="8dp"
+        android:textSize="13sp"
         android:id="@+id/textView"
         android:textColor="@color/icons"
         android:layout_below="@+id/image_view_account_logo"
@@ -51,8 +52,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
             <ImageButton
                 app:srcCompat="@drawable/user"
@@ -75,8 +76,8 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
             <ImageButton
                 app:srcCompat="@drawable/mail"
@@ -99,11 +100,11 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
 
             <ImageButton
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 app:srcCompat="@drawable/lock"
                 android:id="@+id/image_button_change_password"
                 android:scaleType="fitXY"

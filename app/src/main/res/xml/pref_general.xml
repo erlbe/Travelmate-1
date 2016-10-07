@@ -6,13 +6,18 @@
         <SwitchPreference
             android:title="Note Editor"
             android:key="default_editor"
-            android:summary="Toogle to use Lined Editor or Plain Editor"
+            android:summary="Activate to use editor in TravelMate layout"
             android:defaultValue="false"/>
         <SwitchPreference
             android:title="Delete"
             android:key="prompt_for_delete"
-            android:summary="Toogle to prompt for Confirm delete"
+            android:summary="Activate to prompt for delete confirmation"
             android:defaultValue="true"/>
+        <SwitchPreference
+            android:title="Set Language"
+            android:key="set_language"
+            android:summary="Activate to use Spanish Language"
+            android:defaultValue="false"/>
     </PreferenceCategory>
 
 
