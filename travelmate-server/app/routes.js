@@ -1,6 +1,9 @@
 /**
  * Created by Erlend on 11.10.2016.
  */
+var User = require('../app/models/user');
+var Entry = require('../app/models/entry');
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -21,7 +24,11 @@ module.exports = function(app, passport) {
     });
 
     // process the login form
-    // app.post('/login', do all our passport stuff here);
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/login', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // SIGNUP ==============================
@@ -34,7 +41,11 @@ module.exports = function(app, passport) {
     });
 
     // process the signup form
-    // app.post('/signup', do all our passport stuff here);
+    app.post('/signup', passport.authenticate('local-signup', {
+        successRedirect : '/profile', // redirect to the secure profile section
+        failureRedirect : '/signup', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // PROFILE SECTION =====================
@@ -53,6 +64,30 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+    app.get('/postEntry', function(req, res){
+
+        var newEntry = new Entry({
+            title: "Once upon a time",
+            text: "This is the text",
+            _creator: req.user._id
+        });
+
+        req.user.entries.push(newEntry);
+
+        req.user.save(function(err) {
+            if (err) return handleError(err);
+            
+            newEntry.save(function(err){
+                if (err) return handleError(err);
+            });
+        });
+
+        res.send(req.user);
+    });
+    app.get('/test', function(req, res){
+        res.send(req.user);
     });
 };
 
