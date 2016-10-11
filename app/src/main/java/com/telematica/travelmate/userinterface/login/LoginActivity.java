@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.telematica.travelmate.R;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
+import com.telematica.travelmate.userinterface.signup.SignupActivity;
 
 public class LoginActivity extends AppCompatActivity {
     EditText email;
@@ -32,6 +33,13 @@ public class LoginActivity extends AppCompatActivity {
     public void logIn(View view) {
         // TODO: Handle login
         Intent intent = new Intent(getApplicationContext(), EntryListActivity.class);
+        startActivity(intent);
+    }
+
+    /** Called when the user clicks the Sign up button
+     *  Goes to signup activity */
+    public void signUp(View view) {
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
         startActivity(intent);
     }
 }

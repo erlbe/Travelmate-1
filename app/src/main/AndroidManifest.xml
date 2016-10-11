@@ -24,9 +24,7 @@
         <activity
             android:name=".userinterface.entrylist.EntryListActivity"
             android:label="@string/title_activity_notes"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".userinterface.category.CategoryListActivity"
             android:label="@string/title_activity_category"
@@ -92,6 +90,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.telematica.travelmate.userinterface.entrylist.EntryListActivity" />
         </activity>
+        <activity android:name=".userinterface.signup.SignupActivity"></activity>
     </application>
 
 </manifest>
