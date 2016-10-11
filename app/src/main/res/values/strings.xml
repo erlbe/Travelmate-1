@@ -48,6 +48,8 @@
     <string name="name_is_required">Name is Required</string>
     <string name="title_is_required">Title is required</string>
     <string name="entry_is_required">Entry is required</string>
+    <string name="email_prompt">Email</string>
+    <string name="password_prompt">Password</string>
 
 
     <!-- Category Strings -->
@@ -64,7 +66,6 @@
     <string name="change_name">Change Name</string>
     <string name="change_password">Change Password</string>
     <string name="change_email">Change E-Mail</string>
-
 
 
 </resources>

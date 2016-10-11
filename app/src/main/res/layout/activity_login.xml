@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
@@ -8,6 +9,88 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/header2"
     tools:context="com.telematica.travelmate.userinterface.login.LoginActivity">
+
+    <ImageView
+        android:layout_width="108dp"
+        android:layout_height="108dp"
+        android:id="@+id/round_shade"
+        android:src="@drawable/round_shade"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="false"
+        android:layout_below="@+id/login_progress"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+
+    <ImageView
+        android:layout_width="77dp"
+        android:layout_height="108dp"
+        android:id="@+id/logo"
+        android:src="@drawable/appsymbol"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="false"
+        android:layout_alignTop="@+id/round_shade"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TravelMate"
+        android:textSize="20sp"
+        android:id="@+id/textView"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/round_shade"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password_prompt"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_centerVertical="true"
+        android:textColorHint="#FFFFFF"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email_prompt"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:paddingTop="20dp"
+        android:layout_above="@+id/password"
+        android:textColorHint="#FFFFFF"
+        android:selectAllOnFocus="false" />
+
+    <Button
+        android:text="Log in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:id="@+id/login_button"
+        android:onClick="logIn"/>
+
+    <TextView
+        android:text="Or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
+
+    <Button
+        android:text="Sign up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signup_button"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
