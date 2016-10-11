@@ -19,7 +19,8 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-    entries : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Entry'}]
+    entries : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Entry'}],
+    categories : [{type: mongoose.Schema.Types.ObjectId, ref: 'Category'}]
 });
 
 // methods ======================

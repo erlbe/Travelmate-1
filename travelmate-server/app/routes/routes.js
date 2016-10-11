@@ -1,8 +1,9 @@
 /**
  * Created by Erlend on 11.10.2016.
  */
-var User = require('../app/models/user');
-var Entry = require('../app/models/entry');
+var User = require('../models/user');
+var Entry = require('../models/entry');
+var Category = require('../models/category')
 
 module.exports = function(app, passport) {
 
@@ -78,7 +79,7 @@ module.exports = function(app, passport) {
 
         req.user.save(function(err) {
             if (err) return handleError(err);
-            
+
             newEntry.save(function(err){
                 if (err) return handleError(err);
             });
