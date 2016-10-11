@@ -6,6 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('../app/models/user');
 
+//TODO: Handle feedback other than flashing
 module.exports = function(passport) {
     // =========================================================================
     // passport session setup ==================================================
