@@ -88,7 +88,7 @@
         android:layout_below="@+id/new_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="56dp"
-        android:id="@+id/button"
+        android:id="@+id/doSignUpButton"
         android:onClick="doSignUp"/>
 
 </RelativeLayout>

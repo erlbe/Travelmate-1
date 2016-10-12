@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result) {
+                //TODO: Handle wrong username/password
                 if(result != null){
                     System.out.println("JSON:");
                     System.out.println(result);
@@ -92,12 +93,15 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private User parseUser(String result){
+    public static User parseUser(String result){
         try {
             JSONObject jObject = new JSONObject(result);
             String jId = jObject.getString("_id");
             String jName = jObject.getString("name");
-            String jEmail = jObject.getString("email");
+
+            JSONObject jLocal = jObject.getJSONObject("local");
+            String jEmail = jLocal.getString("email");
+
             JSONArray jsonEntries = jObject.getJSONArray("entries");
             List<String> jEntries = new ArrayList<String>();
             for (int i=0; i<jsonEntries.length(); i++) {
