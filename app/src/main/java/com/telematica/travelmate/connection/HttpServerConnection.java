@@ -21,6 +21,7 @@ import java.net.URLEncoder;
 
 public class HttpServerConnection {
     public String connectToServer(String myUrl, int timeOut, String requestMethod, JSONObject jsonObject) {
+        int status = 0;
         try {
             URL url = new URL(myUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -38,11 +39,14 @@ public class HttpServerConnection {
                 conn.setRequestMethod("POST");
                 conn.setDoInput(true);
                 conn.setDoOutput (true);
-                OutputStream outputStream = new DataOutputStream(conn.getOutputStream());
-                OutputStreamWriter osw = new OutputStreamWriter(outputStream, "UTF-8");
-                osw.write(jsonObject.toString());
-                osw.flush();
-                osw.close();
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("charset", "utf-8");
+
+                DataOutputStream wr = new DataOutputStream(conn.getOutputStream ());
+                wr.writeBytes(jsonObject.toString());
+                wr.flush();
+                wr.close();
+
 
                 InputStream is = conn.getInputStream();
                 return readInputStream(is);
@@ -56,6 +60,9 @@ public class HttpServerConnection {
             return null;
         } catch (IOException e) {
             e.printStackTrace();
+            if(status == 401){
+                System.out.println("Unauthorized");
+            }
             return null;
         }
     }

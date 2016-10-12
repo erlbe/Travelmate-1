@@ -42,7 +42,6 @@ module.exports = function(passport) {
         // asynchronous
         // User.findOne wont fire unless data is sent back
         process.nextTick(function() {
-
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
             User.findOne({'local.email' : email}, function(err, user){
@@ -52,13 +51,14 @@ module.exports = function(passport) {
 
                 // check to see if theres already a user with that email
                 if(user){
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    return done(null, false, {message: 'That email is already taken.'});
                 }
                 else{
                     // if there is no user with that email
                     // create the user
                     var newUser = new User();
 
+                    newUser.name = req.body.name;
                     newUser.local.email = email;
                     newUser.local.password = newUser.generateHash(password);
 
@@ -95,11 +95,11 @@ module.exports = function(passport) {
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false, req.flash('loginMessage', 'No user found.'));
+                return done(null, false, {message: 'No user found.'});
             // if the user is found but the password is wrong
 
             if (!user.validPassword(password))
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                return done(null, false, {message: 'Wrong password'}); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
             return done(null, user);
