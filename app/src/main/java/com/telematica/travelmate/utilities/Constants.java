@@ -19,6 +19,7 @@ public class Constants {
     public static final String IS_DUAL_SCREEN = "is_dual_screen";
     public static final String SORT_PREFERENCE = "sort_PREFERENCE";
 
+    public static final String SERVER_LINK = "http://192.168.71.2:8080/api";
 
     public final static int ENTRY = 1;
     public final static int CATEGORY = 2;

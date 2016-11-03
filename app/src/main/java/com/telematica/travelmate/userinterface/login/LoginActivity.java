@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.telematica.travelmate.utilities.Constants.SERVER_LINK;
+
 public class LoginActivity extends AppCompatActivity {
     EditText email;
     EditText password;
@@ -62,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                String result = new HttpServerConnection().connectToServer("http://192.168.10.2:8080/api/login", 15000, "POST", jsonParam);
+                String result = new HttpServerConnection().connectToServer(SERVER_LINK +  "/login", 15000, "POST", jsonParam);
                 return result;
             }
 
@@ -107,7 +109,11 @@ public class LoginActivity extends AppCompatActivity {
             for (int i=0; i<jsonEntries.length(); i++) {
                 jEntries.add( jsonEntries.getString(i) );
             }
-            User loggedUser = new User(jId, jName, jEmail, jEntries);
+            User loggedUser = User.getInstance();
+            loggedUser.setId(jId);
+            loggedUser.setName(jName);
+            loggedUser.setEmail(jEmail);
+            loggedUser.setEntries(jEntries);
             return loggedUser;
 
         } catch (JSONException e) {

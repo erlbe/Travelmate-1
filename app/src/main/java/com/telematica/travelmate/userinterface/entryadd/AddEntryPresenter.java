@@ -17,6 +17,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.telematica.travelmate.data.EntryService.addEntry;
+
 
 public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryListener {
 
@@ -57,6 +59,8 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
             entry.setColor(color);
             entry.setCategoryName(category);
             mEntryRepository.addAsync(entry, this);
+
+            addEntry(entry);
         }
 
     }

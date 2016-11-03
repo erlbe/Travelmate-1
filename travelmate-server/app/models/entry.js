@@ -8,7 +8,7 @@ var entrySchema = mongoose.Schema({
         _creator : { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         _category : { type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
         title: String,
-        text: String
+        content: String
     }
 );
 
