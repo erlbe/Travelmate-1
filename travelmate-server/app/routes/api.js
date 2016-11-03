@@ -48,6 +48,7 @@ module.exports = function(router, passport) {
         var entry = new Entry();
         console.log(req.body);
 
+        entry._id = generateId();
         entry.title = req.body.title;
         entry.content = req.body.content;
         // TODO: Get this from logged user instead
@@ -58,7 +59,7 @@ module.exports = function(router, passport) {
         // save the entry
         entry.save(function(err) {
             if (err) res.send(err);
-            res.json({ message: 'Entry created!' });
+            res.json(entry);
         });
     });
 
@@ -90,4 +91,8 @@ module.exports = function(router, passport) {
             });
         })
     })
+};
+
+var generateId = function () {
+    return Math.floor(Math.random() * (999999999))
 };
