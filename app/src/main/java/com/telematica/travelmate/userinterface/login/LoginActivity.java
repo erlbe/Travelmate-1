@@ -104,16 +104,10 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject jLocal = jObject.getJSONObject("local");
             String jEmail = jLocal.getString("email");
 
-            JSONArray jsonEntries = jObject.getJSONArray("entries");
-            List<String> jEntries = new ArrayList<String>();
-            for (int i=0; i<jsonEntries.length(); i++) {
-                jEntries.add( jsonEntries.getString(i) );
-            }
             User loggedUser = User.getInstance();
             loggedUser.setId(jId);
             loggedUser.setName(jName);
             loggedUser.setEmail(jEmail);
-            loggedUser.setEntries(jEntries);
             return loggedUser;
 
         } catch (JSONException e) {

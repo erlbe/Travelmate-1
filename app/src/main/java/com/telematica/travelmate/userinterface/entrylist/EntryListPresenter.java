@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.telematica.travelmate.application.TravelMateApplication;
+import com.telematica.travelmate.data.EntryService;
 import com.telematica.travelmate.listeners.AsyncQueryListener;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.utilities.Constants;
@@ -86,7 +87,10 @@ public class EntryListPresenter implements EntryListContract.Actions, AsyncQuery
     public List<Entry> getEntries() {
         // FIXME: Load entries from internet here instead of from SQLite repository
 
-        return mRepository.getAllEntries();
+        // "Old" version, getting it from SQLite
+        //return mRepository.getAllEntries();
+
+        return EntryService.getAllEntries();
     }
 
     @Override
