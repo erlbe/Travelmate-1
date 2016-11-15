@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.telematica.travelmate.R;
+import com.telematica.travelmate.data.EntryService;
 import com.telematica.travelmate.listeners.EntryItemListener;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.utilities.EntryComparer;
@@ -84,12 +85,13 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
     }
 
     public void replaceData(List<Entry> entries) {
-        setList(entries);
-        notifyDataSetChanged();
+        //setList(entries);
+        EntryService.loadAllEntries(this);
     }
 
-    private void setList(List<Entry> entries) {
+    public void setList(List<Entry> entries) {
         mEntries = entries;
+        notifyDataSetChanged();
     }
 
     public void setEntryItemListener(EntryItemListener listener){

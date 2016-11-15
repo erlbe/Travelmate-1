@@ -88,9 +88,7 @@ public class EntryListPresenter implements EntryListContract.Actions, AsyncQuery
         // FIXME: Load entries from internet here instead of from SQLite repository
 
         // "Old" version, getting it from SQLite
-        //return mRepository.getAllEntries();
-
-        return EntryService.getAllEntries();
+        return mRepository.getAllEntries();
     }
 
     @Override

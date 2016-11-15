@@ -7,6 +7,7 @@ import com.telematica.travelmate.connection.HttpServerConnection;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.model.User;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
+import com.telematica.travelmate.userinterface.entrylist.EntryListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +70,7 @@ public class EntryService {
         task.execute();
     }
 
-    public static List<Entry> getAllEntries(){
+    public static void loadAllEntries(final EntryListAdapter adapter){
         final List<Entry> entries = new ArrayList<Entry>();
 
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
@@ -112,6 +113,7 @@ public class EntryService {
                             newEntry.setCategoryName(categoryName);
                             entries.add(newEntry);
                         }
+                        adapter.setList(entries);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -120,10 +122,5 @@ public class EntryService {
             }
         };
         task.execute();
-        System.out.println("Entries:");
-        System.out.println(entries);
-        return entries;
     }
-
-
 }
