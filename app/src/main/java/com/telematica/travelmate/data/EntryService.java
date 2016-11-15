@@ -8,8 +8,12 @@ import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.model.User;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.telematica.travelmate.utilities.Constants.SERVER_LINK;
 
@@ -44,13 +48,24 @@ public class EntryService {
 
             @Override
             protected void onPostExecute(String result) {
-                //TODO: Handle wrong username/password
                 if(result != null){
                     System.out.println("JSON:");
                     System.out.println(result);
+
+                    try {
+                        JSONObject jObject = new JSONObject(result);
+                        Long jId = jObject.getLong("_id");
+
+                        entry.setId(jId);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         };
         task.execute();
     }
+
+
 }
