@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.telematica.travelmate.R;
+import com.telematica.travelmate.data.EntryService;
 import com.telematica.travelmate.listeners.EntryItemListener;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.utilities.EntryComparer;
@@ -50,13 +51,6 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
         holder.title.setText(entry.getTitle());
         holder.entryDate.setText(TimeUtils.getTimeAgo(entry.getDateModified()));
 
-        if (entry.getColor() != 0){
-            entryView.setBackgroundColor(entry.getColor());
-            if (entry.getColor() != Color.YELLOW) {
-                holder.title.setTextColor(Color.WHITE);
-                holder.entryDate.setTextColor(Color.WHITE);
-            }
-        }
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,11 +79,13 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
 
     public void replaceData(List<Entry> entries) {
         setList(entries);
-        notifyDataSetChanged();
+        // ERLENDS VERSION TO LOAD IT FROM ONLINE DATABASE:
+        // EntryService.loadAllEntries(this);
     }
 
-    private void setList(List<Entry> entries) {
+    public void setList(List<Entry> entries) {
         mEntries = entries;
+        notifyDataSetChanged();
     }
 
     public void setEntryItemListener(EntryItemListener listener){
@@ -128,9 +124,6 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
             case Constants.SORT_CATEGORY:
                 Collections.sort(mEntries, EntryComparer.CategoryComparer.getsInstance());
                 break;
-            /*case Constants.SORT_COLOR:
-                Collections.sort(mEntries, EntryComparer.ColorComparer.getsInstance());
-                break;*/
             case Constants.SORT_DATE:
                 Collections.sort(mEntries, EntryComparer.LastUpdateComparer.getsInstance());
                 break;

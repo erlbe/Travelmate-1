@@ -5,7 +5,6 @@ public class Enums {
     public enum SortMethodEnum{
         Title,
         Category,
-        Color,
         DateModified
     }
 

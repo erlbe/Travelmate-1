@@ -43,7 +43,7 @@ public class EntrySQLiteRepository implements EntryListContract.Repository{
         ContentValues values = new ContentValues();
         values.put(Constants.COLUMN_TITLE, entry.getTitle());
         values.put(Constants.COLUMN_CONTENT, entry.getContent());
-        values.put(Constants.COLUMN_COLOR, entry.getColor());
+        values.put(Constants.COLUMN_IMAGE, entry.getImage());
         values.put(Constants.COLUMNS_CATEGORY_ID,
                 categorySQLiteManager.createOrGetCategoryId(entry.getCategoryName(), new OnDatabaseOperationCompleteListener() {
             @Override
@@ -60,6 +60,7 @@ public class EntrySQLiteRepository implements EntryListContract.Repository{
         values.put(Constants.COLUMN_CREATED_TIME, System.currentTimeMillis());
         values.put(Constants.COLUMN_MODIFIED_TIME, System.currentTimeMillis());
 
+
         //Make Asynchronous database insert via the Content Provider
         CustomAsyncHandler queryHandler = new CustomAsyncHandler(mContext.getContentResolver(), listener);
         queryHandler.startInsert(Constants.INSERT_ENTRY, null, TravelMateContentProvider.CONTENT_URI, values);
@@ -72,11 +73,12 @@ public class EntrySQLiteRepository implements EntryListContract.Repository{
         ContentValues values = new ContentValues();
         values.put(Constants.COLUMN_TITLE, entry.getTitle());
         values.put(Constants.COLUMN_CONTENT, entry.getContent());
-        values.put(Constants.COLUMN_COLOR, entry.getColor());
+        values.put(Constants.COLUMN_IMAGE, entry.getImage());
         values.put(Constants.COLUMNS_CATEGORY_ID, entry.getCategoryId());
         values.put(Constants.COLUMN_CATEGORY_NAME, entry.getCategoryName());
         values.put(Constants.COLUMN_CREATED_TIME, System.currentTimeMillis());
         values.put(Constants.COLUMN_MODIFIED_TIME, System.currentTimeMillis());
+
 
         CustomAsyncHandler queryHandler = new CustomAsyncHandler(mContext.getContentResolver(), listener);
         queryHandler.startUpdate(Constants.INSERT_ENTRY, null,
@@ -89,11 +91,12 @@ public class EntrySQLiteRepository implements EntryListContract.Repository{
         ContentValues values = new ContentValues();
         values.put(Constants.COLUMN_TITLE, entry.getTitle());
         values.put(Constants.COLUMN_CONTENT, entry.getContent());
-        values.put(Constants.COLUMN_COLOR, entry.getColor());
+        values.put(Constants.COLUMN_IMAGE, entry.getImage());
         values.put(Constants.COLUMNS_CATEGORY_ID, entry.getCategoryId());
         values.put(Constants.COLUMN_CATEGORY_NAME, entry.getCategoryName());
         values.put(Constants.COLUMN_CREATED_TIME, System.currentTimeMillis());
         values.put(Constants.COLUMN_MODIFIED_TIME, System.currentTimeMillis());
+
 
         mContext.getContentResolver().update(TravelMateContentProvider.CONTENT_URI,
                 values, Constants.COLUMN_ID + "=" + entry.getId(), null);

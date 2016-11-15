@@ -2,8 +2,12 @@ package com.telematica.travelmate.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.telematica.travelmate.utilities.Constants;
 import com.telematica.travelmate.utilities.FileUtils;
@@ -12,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Manages database creation
@@ -50,8 +55,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
     //make the constructor private so it cannot be
-    //instantiated outside of this class
-    private DatabaseHelper(Context context) {
+    //instantiated outside of this class -- changed to public for AndroidDatabaseManager
+    public DatabaseHelper(Context context) {
         super(context, Constants.SQLITE_DATABASE, null, DATABASE_VERSION);
         this.mContext = context;
         mPref = mContext.getSharedPreferences(Constants.PREFERENCE_FILE, Context.MODE_PRIVATE);
@@ -78,11 +83,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             + Constants.COLUMN_ID + " integer primary key autoincrement, "
             + Constants.COLUMN_TITLE + " text not null, "
             + Constants.COLUMN_CONTENT + " text not null, "
-            + Constants.COLUMN_COLOR + " integer not null, "
             + Constants.COLUMNS_CATEGORY_ID + " INTEGER not null,"
             + Constants.COLUMN_CATEGORY_NAME + " TEXT NOT NULL, "
             + Constants.COLUMN_MODIFIED_TIME + " integer not null, "
             + Constants.COLUMN_CREATED_TIME + " integer not null, "
+            + Constants.COLUMN_IMAGE + " BLOB, "
             + "FOREIGN KEY(category_id) REFERENCES category(_id)" + ")";
 
     //String to create a category table
@@ -133,7 +138,55 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return false;
     }
 
+    public ArrayList<Cursor> getData(String Query){
+        //get writable database
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String[] columns = new String[] { "mesage" };
+        //an array list of cursor to save two cursors one has results from the query
+        //other cursor stores error message if any errors are triggered
+        ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
+        MatrixCursor Cursor2= new MatrixCursor(columns);
+        alc.add(null);
+        alc.add(null);
 
+
+        try{
+            String maxQuery = Query ;
+            //execute the query results will be save in Cursor c
+            Cursor c = sqlDB.rawQuery(maxQuery, null);
+
+
+            //add value to cursor2
+            Cursor2.addRow(new Object[] { "Success" });
+
+            alc.set(1,Cursor2);
+            if (null != c && c.getCount() > 0) {
+
+
+                alc.set(0,c);
+                c.moveToFirst();
+
+                return alc ;
+            }
+            return alc;
+        } catch(SQLException sqlEx){
+            Log.d("printing exception", sqlEx.getMessage());
+            //if any exceptions are triggered save the error message to cursor an return the arraylist
+            Cursor2.addRow(new Object[] { ""+sqlEx.getMessage() });
+            alc.set(1,Cursor2);
+            return alc;
+        } catch(Exception ex){
+
+            Log.d("printing exception", ex.getMessage());
+
+            //if any exceptions are triggered save the error message to cursor an return the arraylist
+            Cursor2.addRow(new Object[] { ""+ex.getMessage() });
+            alc.set(1,Cursor2);
+            return alc;
+        }
+
+
+    }
 
 
 

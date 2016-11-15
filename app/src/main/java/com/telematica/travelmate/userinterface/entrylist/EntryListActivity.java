@@ -18,6 +18,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.KeyboardUtil;
 import com.telematica.travelmate.R;
+import com.telematica.travelmate.application.AndroidDatabaseManager;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.userinterface.account.AccountActivity;
 import com.telematica.travelmate.userinterface.settings.SettingsActivity;
@@ -97,7 +98,8 @@ public class EntryListActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName("Categories").withIcon(FontAwesome.Icon.faw_folder).withIdentifier(Constants.CATEGORY),
                         new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(Constants.ACCOUNT),
                         new PrimaryDrawerItem().withName("Save to SD Card").withIcon(FontAwesome.Icon.faw_download).withIdentifier(Constants.BACKUP),
-                        new PrimaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog).withIdentifier(Constants.SETTINGS)
+                        new PrimaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog).withIdentifier(Constants.SETTINGS),
+                        new PrimaryDrawerItem().withName("Database").withIcon(FontAwesome.Icon.faw_table).withIdentifier(Constants.TABLE)
                 )
                 .withOnDrawerItemClickListener(new com.mikepenz.materialdrawer.Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -159,8 +161,10 @@ public class EntryListActivity extends AppCompatActivity {
                 startActivity(new Intent(EntryListActivity.this, CategoryListActivity.class));
                 break;
             case Constants.ACCOUNT:
-                //Go to checkout page
                 startActivity(new Intent(EntryListActivity.this, AccountActivity.class));
+                break;
+            case Constants.TABLE:
+                startActivity(new Intent(EntryListActivity.this, AndroidDatabaseManager.class));
                 break;
 
         }

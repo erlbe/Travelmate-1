@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static com.telematica.travelmate.userinterface.login.LoginActivity.parseUser;
+import static com.telematica.travelmate.utilities.Constants.SERVER_LINK;
 
 public class SignupActivity extends AppCompatActivity {
     EditText newName;
@@ -60,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                String result = new HttpServerConnection().connectToServer("http://192.168.10.2:8080/api/signup", 15000, "POST", jsonParam);
+                String result = new HttpServerConnection().connectToServer(SERVER_LINK+"/signup", 15000, "POST", jsonParam);
                 return result;
             }
 

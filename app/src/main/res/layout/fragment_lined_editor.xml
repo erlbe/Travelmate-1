@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff59d"
@@ -55,7 +61,7 @@
         <EditText  android:id="@+id/edit_text_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:textSize="@dimen/text_size_xxnormal"
+            android:textSize="@dimen/text_size_large"
             android:hint="@string/title"
             android:background="@android:color/transparent"
             android:singleLine="true"
@@ -81,7 +87,16 @@
         android:gravity="top"
         android:padding="@dimen/margin_padding_tiny"
         android:scrollbars="vertical"
-        android:textSize="@dimen/text_size_header" />
+        android:minHeight="345dp"
+        android:textSize="@dimen/text_size_xxnormal" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/addimagetext"
+        android:id="@+id/image_view_entry" />
 
 </LinearLayout>
+
+
+</ScrollView>

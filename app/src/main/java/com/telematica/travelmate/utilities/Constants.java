@@ -19,18 +19,19 @@ public class Constants {
     public static final String IS_DUAL_SCREEN = "is_dual_screen";
     public static final String SORT_PREFERENCE = "sort_PREFERENCE";
 
+    public static final String SERVER_LINK = "http://192.168.71.2:8080/api";
 
     public final static int ENTRY = 1;
     public final static int CATEGORY = 2;
     public static final int BACKUP = 3;
     public final static int SETTINGS = 4;
     public final static int ACCOUNT = 5;
+    public final static int TABLE = 6;
 
 
     public final static int SORT_TITLE = 1;
     public final static int SORT_CATEGORY = 2;
-    public static final int SORT_COLOR = 3;
-    public final static int SORT_DATE = 4;
+    public final static int SORT_DATE = 3;
 
     public static final String ENTRIES_TABLE = "note";
     public static final String CATEGORY_TABLE = "category";
@@ -50,16 +51,18 @@ public class Constants {
     public static final String COLUMN_CONTENT = "content";
     public static final String COLUMN_MODIFIED_TIME = "modified_time";
     public static final String COLUMN_DUE_DATE = "due_date";
-    public static final String COLUMN_COLOR = "color";
     public static final String COLUMN_CREATED_TIME = "created_time";
     public static final String COLUMNS_CATEGORY_ID = "category_id";
     public static final String COLUMNS_TODO_LIST_ID = "todo_list_id";
     public static final String COLUMN_CATEGORY_NAME = "category_name";
-    public static final String COLUMN_SORTED_NOTES = "sorted_note";
+    public static final String COLUMN_SORTED_ENTRIES = "sorted_entry";
     public static final String COLUMN_SORTED_TODOS = "sorted_todo";
     public static final String COLUMN_BACKUP_PROVIDER = "backup_provider";
     public static final String COLUMN_BACKUP_FILE_SIZE = "backup_file_size";
+    public static final String COLUMN_IMAGE = "image";
     public final static String PREFERENCE_FILE = "preference_file";
+
+    public final static int SELECT_PICTURE_REQUEST_CODE = 1000;
 
 
 
@@ -68,7 +71,7 @@ public class Constants {
             Constants.COLUMN_ID,
             Constants.COLUMN_TITLE,
             Constants.COLUMN_CONTENT,
-            Constants.COLUMN_COLOR,
+            Constants.COLUMN_IMAGE,
             Constants.COLUMN_CATEGORY_NAME,
             Constants.COLUMNS_CATEGORY_ID,
             Constants.COLUMN_CREATED_TIME,

@@ -40,6 +40,5 @@ public interface EntryListContract {
         void deleteAsync(Entry entry, AsyncQueryListener listener);
         List<Entry> getAllEntries();
         Entry getEntryById(long id);
-
     }
 }

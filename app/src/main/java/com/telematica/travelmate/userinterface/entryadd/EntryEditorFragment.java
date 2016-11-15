@@ -2,12 +2,23 @@ package com.telematica.travelmate.userinterface.entryadd;
 
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.telematica.travelmate.R;
@@ -28,11 +40,14 @@ import com.telematica.travelmate.listeners.OnCategorySelectedListener;
 import com.telematica.travelmate.model.Category;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.userinterface.category.CategoryDialogFragment;
-//import com.telematica.travelmate.userinterface.color.ColorPickerDialogFragment;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
 import com.telematica.travelmate.utilities.Constants;
 import com.squareup.otto.Bus;
+import com.telematica.travelmate.utilities.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,14 +56,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static android.app.Activity.RESULT_OK;
+import static com.telematica.travelmate.utilities.Constants.SELECT_PICTURE_REQUEST_CODE;
+
 
 public class EntryEditorFragment extends Fragment
     implements AddEntryContract.View{
 
-    private int mColor = 0;
     private long categoryId;
     private Category mSelectedCategory = null;
     private CategoryDialogFragment selectCategoryDialog;
+    private Uri outputFileUri;
 
     private final static String LOG_TAG = AddEntryActivity.class.getSimpleName();
 
@@ -59,6 +77,7 @@ public class EntryEditorFragment extends Fragment
     @BindView(R.id.edit_text_category) EditText mCategory;
     @BindView(R.id.edit_text_title) EditText mTitle;
     @BindView(R.id.edit_text_entry) EditText mContent;
+    @BindView(R.id.image_view_entry) ImageView mImage;
 
 
     @Inject Bus mBus;
@@ -112,6 +131,14 @@ public class EntryEditorFragment extends Fragment
             mRootView = inflater.inflate(R.layout.fragment_plain_editor, container, false);
         }
         ButterKnife.bind(this, mRootView);
+
+
+        mImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openImageIntent();
+            }
+        });
         TravelMateApplication.getInstance().getAppComponent().inject(this);
         try {
             mBus.register(this);
@@ -137,6 +164,7 @@ public class EntryEditorFragment extends Fragment
         }else {
             mPresenter = new AddEntryPresenter(this, 0);
         }
+        mPresenter.initiateImage();
 
     }
 
@@ -161,8 +189,9 @@ public class EntryEditorFragment extends Fragment
                 validateAndSaveContent();
                 break;
             case android.R.id.home:
+                Bitmap bitmap = ((BitmapDrawable)mImage.getDrawable()).getBitmap();
                 mPresenter.saveOnExit(mTitle.getText().toString(),mCategory.getText().toString(),
-                        mContent.getText().toString(), mColor);
+                        mContent.getText().toString(), bitmap);
                 break;
             case R.id.action_delete:
                 mPresenter.onDeleteEntryButtonClicked();
@@ -170,6 +199,15 @@ public class EntryEditorFragment extends Fragment
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+    @Override
+    public void populateImage(Entry entry){
+        if (entry.getImage() != null) {
+            mImage.setImageBitmap(FileUtils.getImageFromBytes(entry.getImage()));
+        }
+    }
+
 
 
     @Override
@@ -181,9 +219,25 @@ public class EntryEditorFragment extends Fragment
         mContent.setText(entry.getContent());
         mContent.setHint(R.string.edit_entry);
         categoryId = entry.getCategoryId();
+
+        /*if (entry.getImage() != null) {
+            mImage.setImageBitmap(FileUtils.getImageFromBytes(entry.getImage()));
+        } else {
+            mFab.setVisibility(View.VISIBLE);
+        }*/
     }
 
 
+    @Override
+    public void deleteImage(Entry entry){
+        mImage.setImageBitmap(null);
+        entry.setImage(null);
+    }
+
+    @Override
+    public void addImage(Entry entry, Bitmap bitmap){
+        entry.setImage(FileUtils.getBytesFromImage(bitmap));
+    }
 
     @Override
     public void displayCategory(String category) {
@@ -363,10 +417,80 @@ public class EntryEditorFragment extends Fragment
             return;
         }
 
-        mPresenter.onAddClick(title, category, content, mColor);
-
+        Bitmap bitmap = ((BitmapDrawable)mImage.getDrawable()).getBitmap();
+        mPresenter.onAddClick(title, category, content, bitmap);
 
     }
 
+    private void openImageIntent() {
+    // Determine Uri of camera image to save.
+    final File root = new File(Environment.getExternalStorageDirectory() + File.separator + "MyDir" + File.separator);
+    root.mkdirs();
+    final String fname = FileUtils.getUniqueImageFilename();
+    final File sdImageMainDirectory = new File(root, fname);
+    outputFileUri = Uri.fromFile(sdImageMainDirectory);
+
+    // Camera.
+    final List<Intent> cameraIntents = new ArrayList<Intent>();
+    final Intent captureIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+    final PackageManager packageManager = mContext.getPackageManager();
+    final List<ResolveInfo> listCam = packageManager.queryIntentActivities(captureIntent, 0);
+    for(ResolveInfo res : listCam) {
+        final String packageName = res.activityInfo.packageName;
+        final Intent intent = new Intent(captureIntent);
+        intent.setComponent(new ComponentName(res.activityInfo.packageName, res.activityInfo.name));
+        intent.setPackage(packageName);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        cameraIntents.add(intent);
+    }
+
+    // Filesystem.
+    final Intent galleryIntent = new Intent();
+    galleryIntent.setType("image/*");
+    galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+
+    // Chooser of filesystem options.
+    final Intent chooserIntent = Intent.createChooser(galleryIntent, "Select Source");
+
+    // Add the camera options.
+    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, cameraIntents.toArray(new Parcelable[cameraIntents.size()]));
+
+    startActivityForResult(chooserIntent, SELECT_PICTURE_REQUEST_CODE);
+}
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE_REQUEST_CODE) {
+                final boolean isCamera;
+                if (data == null) {
+                    isCamera = true;
+                } else {
+                    final String action = data.getAction();
+                    if (action == null) {
+                        isCamera = false;
+                    } else {
+                        isCamera = action.equals(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    }
+                }
+
+                Uri selectedImageUri;
+                if (isCamera) {
+                    selectedImageUri = outputFileUri;
+                } else {
+                    selectedImageUri = data == null ? null : data.getData();
+                }
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), selectedImageUri);
+                    // Log.d(TAG, String.valueOf(bitmap));
+                    //mPresenter.killImage();
+                    //mPresenter.putImage(bitmap);
+                    mImage.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }

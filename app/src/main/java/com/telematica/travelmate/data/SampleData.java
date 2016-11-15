@@ -1,7 +1,16 @@
 package com.telematica.travelmate.data;
 
-import com.telematica.travelmate.model.Entry;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
 
+import com.telematica.travelmate.R;
+import com.telematica.travelmate.model.Entry;
+import com.telematica.travelmate.utilities.FileUtils;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,8 +23,8 @@ import java.util.List;
  */
 public class SampleData{
 
-
     public static List<Entry> getSampleEntries(){
+
 
         List<Entry> entries = new ArrayList<>();
 

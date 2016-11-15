@@ -1,6 +1,7 @@
 package com.telematica.travelmate.userinterface.entryadd;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.TextUtils;
 
@@ -12,6 +13,7 @@ import com.telematica.travelmate.userinterface.category.CategoryListContract;
 //import com.telematica.travelmate.userinterface.color.ColorChangeEvent;
 import com.telematica.travelmate.userinterface.entrylist.EntryListContract;
 import com.telematica.travelmate.utilities.Constants;
+import com.telematica.travelmate.utilities.FileUtils;
 
 import java.util.List;
 
@@ -43,21 +45,22 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
 
 
     @Override
-    public void onAddClick(String title, String category, String content, int color) {
+    public void onAddClick(String title, String category, String content, Bitmap image) {
         if (mEditMode && mCurrentEntry != null){
             mCurrentEntry.setContent(content);
             mCurrentEntry.setTitle(title);
             mCurrentEntry.setCategoryName(category);
-            mCurrentEntry.setColor(color);
+            mCurrentEntry.setImage(FileUtils.getBytesFromImage(image));
             mEntryRepository.updateAsync(mCurrentEntry, this);
         }else {
             Entry entry = new Entry();
             entry.setTitle(title);
             entry.setContent(content);
-            entry.setColor(color);
             entry.setCategoryName(category);
+            entry.setImage(FileUtils.getBytesFromImage(image));
             mEntryRepository.addAsync(entry, this);
         }
+
 
     }
 
@@ -66,6 +69,13 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
     public void checkStatus() {
         if (mEditMode && mCurrentEntry != null && mCurrentEntry.getId() > 0){
             mView.populateEntry(mCurrentEntry);
+        }
+    }
+
+    @Override
+    public void initiateImage() {
+        if (mEditMode && mCurrentEntry != null && mCurrentEntry.getId() > 0){
+            mView.populateImage(mCurrentEntry);
         }
     }
 
@@ -88,7 +98,7 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
 
 
     @Override
-    public void saveOnExit(String title, String category, String content, int color) {
+    public void saveOnExit(String title, String category, String content, Bitmap image) {
         if (TextUtils.isEmpty(title) && TextUtils.isEmpty(content)){
             return;
         }
@@ -104,8 +114,8 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
         if (TextUtils.isEmpty(category)){
             category = Constants.DEFAULT_CATEGORY;
         }
-        onAddClick(title, category, content, color);
-        mView.displayPreviousActivity();
+        onAddClick(title, category, content, image);
+        //mView.displayPreviousActivity();
 
     }
 
@@ -154,4 +164,18 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
         }
     }
     //endregion
+
+
+    @Override
+    public void killImage(){
+        mView.deleteImage(mCurrentEntry);
+    }
+
+
+    @Override
+    public void putImage(Bitmap bitmap){
+        mCurrentEntry.setImage(FileUtils.getBytesFromImage(bitmap));
+        //mView.addImage(mCurrentEntry, bitmap);
+    }
+
 }

@@ -27,11 +27,11 @@ public class Entry {
 
     private String title;
     private String content;
-    private int color;
     private long dateCreated;
     private long dateModified;
     private String categoryName;
     private long categoryId;
+    private byte[] image;
 
 
     public Entry(){}
@@ -41,7 +41,7 @@ public class Entry {
         entry.setId(cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID)));
         entry.setTitle(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TITLE)));
         entry.setContent(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CONTENT)));
-        entry.setColor(cursor.getInt(cursor.getColumnIndex(Constants.COLUMN_COLOR)));
+        entry.setImage(cursor.getBlob(cursor.getColumnIndex(Constants.COLUMN_IMAGE)));
         entry.setCategoryId(cursor.getLong(cursor.getColumnIndex(Constants.COLUMNS_CATEGORY_ID)));
         entry.setCategoryName(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CATEGORY_NAME)));
         entry.setDateCreated(cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_CREATED_TIME)));
@@ -85,14 +85,6 @@ public class Entry {
         this.content = content;
     }
 
-    public int getColor() {
-        return color;
-    }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
-
 
     public long getDateCreated() {
         return dateCreated;
@@ -117,5 +109,13 @@ public class Entry {
 
     public void setCategoryId(long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

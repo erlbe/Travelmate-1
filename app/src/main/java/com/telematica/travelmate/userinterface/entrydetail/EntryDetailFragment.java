@@ -18,12 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.telematica.travelmate.R;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.userinterface.entryadd.AddEntryActivity;
 import com.telematica.travelmate.utilities.Constants;
+import com.telematica.travelmate.utilities.FileUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +37,7 @@ public class EntryDetailFragment extends Fragment implements EntryDetailContract
     @BindView(R.id.edit_text_title) EditText mTitle;
     @BindView(R.id.edit_text_entry) EditText mContent;
     @BindView(R.id.edit_text_category) EditText mCategory;
+    @BindView(R.id.image_view_entry) ImageView mImage;
 
     private EntryDetailPresenter mPresenter;
 
@@ -64,7 +67,6 @@ public class EntryDetailFragment extends Fragment implements EntryDetailContract
         setHasOptionsMenu(true);
         showLinedEditor = PreferenceManager
                 .getDefaultSharedPreferences(getContext()).getBoolean("default_editor", true);
-
     }
 
 
@@ -130,9 +132,8 @@ public class EntryDetailFragment extends Fragment implements EntryDetailContract
         mTitle.setText(entry.getTitle());
         mCategory.setTextColor(Color.BLACK);
         mContent.setTextColor(Color.BLACK);
-        if (entry.getColor() != 0){
-            mCategory.setBackgroundColor(entry.getColor());
-            mCategory.setTextColor(Color.BLACK);
+        if(entry.getImage() != null){
+            mImage.setImageBitmap(FileUtils.getImageFromBytes(entry.getImage()));
         }
     }
 

@@ -7,18 +7,21 @@ import java.util.List;
  */
 
 public class User {
+    private static User instance = null;
+
     private String id;
     private String name;
     private String email;
     private List<String> entries;
 
-    public User(String id, String name, String email, List<String> entries) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.entries = entries;
-    }
-    public User(){
+    private User(){
+    };
+
+    public static User getInstance(){
+        if(instance == null){
+            instance = new User();
+        }
+        return instance;
     }
 
     public String getId() {

@@ -108,38 +108,4 @@ public class EntryComparer {
     }
 
 
-    public static class ColorComparer implements Comparator<Entry> {
-
-        //Singleton instance of this comparator
-        private static ColorComparer sInstance = null;
-
-        //Empty constructor
-        protected ColorComparer(){}
-
-        public static ColorComparer getsInstance(){
-            //create an instance if one does not exist
-            if (sInstance == null){
-                sInstance = new ColorComparer();
-            }
-            return sInstance;
-        }
-
-
-        @TargetApi(Build.VERSION_CODES.KITKAT)
-        @Override
-        public int compare(Entry lhs, Entry rhs) {
-
-            //ensure both Notes have titles
-            //Ensure both Services have names
-            if (lhs.getColor() > -1 && rhs.getColor() < -1){
-
-                //Return a string comparison of the names
-                return Integer.compare(lhs.getColor(), rhs.getColor());
-            }
-            return 0;
-        }
-    }
-
-
-
 }

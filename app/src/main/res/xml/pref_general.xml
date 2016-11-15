@@ -7,7 +7,7 @@
             android:title="Note Editor"
             android:key="default_editor"
             android:summary="Activate to use editor in TravelMate layout"
-            android:defaultValue="false"/>
+            android:defaultValue="true"/>
         <SwitchPreference
             android:title="Delete"
             android:key="prompt_for_delete"
