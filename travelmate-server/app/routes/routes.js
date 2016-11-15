@@ -71,7 +71,7 @@ module.exports = function(app, passport) {
 
         var newEntry = new Entry({
             title: "Once upon a time",
-            text: "This is the text",
+            content: "This is the text",
             _creator: req.user._id
         });
 

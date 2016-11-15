@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.telematica.travelmate.data.EntryService.addEntry;
+
 
 public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryListener {
 
@@ -59,6 +61,8 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
             entry.setCategoryName(category);
             entry.setImage(FileUtils.getBytesFromImage(image));
             mEntryRepository.addAsync(entry, this);
+
+            addEntry(entry);
         }
 
 
