@@ -55,7 +55,8 @@ public class EntryListPresenter implements EntryListContract.Actions, AsyncQuery
             //Call to check if the user has a saved preference for sorting the Entries
             checkSortPreference();
         }else {
-            mView.showEmptyText(true);
+            // FIXME: Can't show "No entries found" text because we use async call to internet.
+            mView.showEmptyText(false);
             mView.showEntries(new ArrayList<Entry>());
         }
 

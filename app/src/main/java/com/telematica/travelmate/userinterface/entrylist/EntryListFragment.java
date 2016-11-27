@@ -78,7 +78,7 @@ public class EntryListFragment extends Fragment implements EntryListContract.Vie
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mListAdapter = new EntryListAdapter(new ArrayList<Entry>());
+        mListAdapter = EntryListAdapter.getInstance();
     }
 
 

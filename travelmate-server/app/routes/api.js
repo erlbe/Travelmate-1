@@ -91,6 +91,14 @@ module.exports = function(router, passport) {
             });
         })
     })
+
+    router.get('entry/:id', function(req, res, next){
+        Entry.findById(req.params.id, function(err, entry){
+            if (err)
+                res.send(err);
+            res.send(entry);
+        })
+    })
 };
 
 var generateId = function () {

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.telematica.travelmate.application.TravelMateApplication;
+import com.telematica.travelmate.data.EntryService;
 import com.telematica.travelmate.listeners.AsyncQueryListener;
 import com.telematica.travelmate.model.Category;
 import com.telematica.travelmate.model.Entry;
@@ -18,8 +19,6 @@ import com.telematica.travelmate.utilities.FileUtils;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import static com.telematica.travelmate.data.EntryService.addEntry;
 
 
 public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryListener {
@@ -62,7 +61,8 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
             entry.setImage(FileUtils.getBytesFromImage(image));
             mEntryRepository.addAsync(entry, this);
 
-            addEntry(entry);
+            // Erlend adds enry to API. May be unneeded.
+            // EntryService.addEntry(entry);
         }
 
 

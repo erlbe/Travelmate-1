@@ -17,6 +17,7 @@ import com.telematica.travelmate.utilities.EntryComparer;
 import com.telematica.travelmate.utilities.Constants;
 import com.telematica.travelmate.utilities.TimeUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,8 +32,15 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
     private EntryItemListener mItemListener;
     private View entryView;
 
+    private static EntryListAdapter instance = null;
 
-    public EntryListAdapter(List<Entry> entries){
+    public static EntryListAdapter getInstance(){
+        if(instance == null){
+            instance = new EntryListAdapter(new ArrayList<Entry>());
+        }
+        return instance;
+    }
+    private EntryListAdapter(List<Entry> entries){
         mEntries = entries;
     }
 
@@ -78,18 +86,34 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
     }
 
     public void replaceData(List<Entry> entries) {
-        setList(entries);
+        //setList(entries);
         // ERLENDS VERSION TO LOAD IT FROM ONLINE DATABASE:
-        // EntryService.loadAllEntries(this);
+        EntryService.loadAllEntries(this);
+    }
+
+    public List<Entry> getAllEntries() {
+        return mEntries;
     }
 
     public void setList(List<Entry> entries) {
         mEntries = entries;
+        System.out.println("Entries changed!!!");
+        System.out.println(entries);
+
         notifyDataSetChanged();
     }
 
     public void setEntryItemListener(EntryItemListener listener){
         mItemListener = listener;
+    }
+
+    public Entry getEntryById(long id) {
+        for (Entry entry : mEntries) {
+            if (entry.getId() == id){
+                return entry;
+            }
+        }
+        return null;
     }
 
 
@@ -133,7 +157,6 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
         }
         notifyItemRangeChanged(0, mEntries.size());
     }
-
 
 
 

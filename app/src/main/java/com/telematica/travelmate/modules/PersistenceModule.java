@@ -3,6 +3,7 @@ package com.telematica.travelmate.modules;
 import android.content.Context;
 
 import com.telematica.travelmate.data.CategorySQLiteRepository;
+import com.telematica.travelmate.data.EntryAPIRepository;
 import com.telematica.travelmate.data.EntrySQLiteRepository;
 import com.telematica.travelmate.userinterface.category.CategoryListContract;
 import com.telematica.travelmate.userinterface.entrylist.EntryListContract;
@@ -20,7 +21,7 @@ public class PersistenceModule {
     @Provides
     @Singleton
     public EntryListContract.Repository providesEntryRepository(Context context){
-        return new EntrySQLiteRepository(context);
+        return new EntryAPIRepository(context);
     }
 
 
