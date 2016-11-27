@@ -101,8 +101,11 @@ public class EntryService {
                 if(result != null){
                     System.out.println("JSON:");
                     System.out.println(result);
+                    listener.onUpdateComplete(0, null, result.length());
                 }
-                listener.onUpdateComplete(0, null, result.length());
+                else{
+                    listener.onUpdateComplete(0, null, 0);
+                }
             }
         };
         task.execute();
@@ -156,6 +159,33 @@ public class EntryService {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        };
+        task.execute();
+    }
+
+    public static void deleteEntry(final Entry entry, final AsyncQueryListener listener) {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+            @Override
+            protected void onPreExecute() {
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                String result = new HttpServerConnection().connectToServer(SERVER_LINK + "/entry/" + entry.getId(), 15000, "DELETE", null);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if(result != null){
+                    System.out.println("JSON:");
+                    System.out.println(result);
+                    listener.onDeleteComplete(Constants.DELETE_ENTRY, null, result.length());
+                }
+                else {
+                    listener.onDeleteComplete(Constants.DELETE_ENTRY, null, 0);
                 }
             }
         };

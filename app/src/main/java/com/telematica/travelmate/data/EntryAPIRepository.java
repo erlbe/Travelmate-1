@@ -34,7 +34,7 @@ public class EntryAPIRepository implements EntryListContract.Repository {
 
     @Override
     public void deleteAsync(Entry entry, AsyncQueryListener listener) {
-        //TODO: Implement this
+        EntryService.deleteEntry(entry, listener);
         System.out.println("Delete entry");
     }
 

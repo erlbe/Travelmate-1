@@ -26,8 +26,8 @@ public class HttpServerConnection {
             URL url = new URL(myUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(timeOut);
-            if(requestMethod.equals("GET")){
-                conn.setRequestMethod("GET");
+            if(requestMethod.equals("GET") || requestMethod.equals("DELETE")){
+                conn.setRequestMethod(requestMethod);
                 conn.setDoInput(true);
 
                 conn.connect();
