@@ -41,8 +41,8 @@ public class AddSampleDateIntentService extends IntentService {
     //Dummy implementation of AsyncQueryHandler
     AsyncQueryListener asyncQueryListener = new AsyncQueryListener() {
         @Override
-        public void onInsertComplete(int token, Object cookie, Uri uri) {
-            Log.d(LOG_TAG, "Entry added " + uri.getLastPathSegment());
+        public void onInsertComplete(int token, Object cookie, int result) {
+            Log.d(LOG_TAG, "Entry added " + result);
         }
 
         @Override

@@ -8,7 +8,7 @@ import android.net.Uri;
  * to surface async data operations back to the calling class
  */
 public interface AsyncQueryListener {
-    void onInsertComplete(int token, Object cookie, Uri uri);
+    void onInsertComplete(int token, Object cookie, int result);
     void onQueryComplete(int token, Object cookie, Cursor cursor);
     void onUpdateComplete(int token, Object cookie, int result);
     void onDeleteComplete(int token, Object cookie, int result);

@@ -48,7 +48,7 @@ public class EntryDetailPresenter implements EntryDetailContract.Action,
 
 
     @Override
-    public void onInsertComplete(int token, Object cookie, Uri uri) {
+    public void onInsertComplete(int token, Object cookie, int result) {
         
     }
 

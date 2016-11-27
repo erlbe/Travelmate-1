@@ -132,9 +132,8 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
 
     //region Implementation of AsyncQueryHandler Listener
     @Override
-    public void onInsertComplete(int token, Object cookie, Uri uri) {
+    public void onInsertComplete(int token, Object cookie, int result) {
         if (token == Constants.INSERT_ENTRY){
-            long result = 1;
             if (result > 0){
                 mView.displayMessage("Entry added");
                 //Refresh screen

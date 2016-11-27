@@ -123,9 +123,8 @@ public class EntryListPresenter implements EntryListContract.Actions, AsyncQuery
 
     //region Implementation of AsyncQueryHandler Listener
     @Override
-    public void onInsertComplete(int token, Object cookie, Uri uri) {
+    public void onInsertComplete(int token, Object cookie, int result) {
         if (token == Constants.INSERT_ENTRY){
-            long result = 1;
             if (result > 0){
                 mView.showMessage("Entry added");
                 //Refresh screen

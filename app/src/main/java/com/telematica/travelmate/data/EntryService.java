@@ -66,8 +66,9 @@ public class EntryService {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    listener.onInsertComplete(Constants.INSERT_ENTRY, null, result.length());
                 }
-                listener.onInsertComplete(Constants.INSERT_ENTRY, null, null);
+                listener.onInsertComplete(Constants.INSERT_ENTRY, null, 0);
             }
         };
         task.execute();

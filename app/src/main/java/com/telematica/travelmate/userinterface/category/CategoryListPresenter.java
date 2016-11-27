@@ -147,9 +147,8 @@ public class CategoryListPresenter implements
      * @param uri - This is the URI of the inserted data
      */
     @Override
-    public void onInsertComplete(int token, Object cookie, Uri uri) {
+    public void onInsertComplete(int token, Object cookie, int result) {
         if (token == Constants.INSERT_CATEGORY){
-            long result = Long.parseLong(uri.getLastPathSegment());
             if (result > 0){
                 mView.displayMessage("Category added");
             }else {

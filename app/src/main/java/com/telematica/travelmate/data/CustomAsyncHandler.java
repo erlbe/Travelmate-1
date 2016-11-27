@@ -38,7 +38,7 @@ public class CustomAsyncHandler extends AsyncQueryHandler{
     protected void onInsertComplete(int token, Object cookie, Uri uri) {
         final AsyncQueryListener listener = mListener.get();
         if (listener != null){
-            listener.onInsertComplete(token, cookie, uri);
+            listener.onInsertComplete(token, cookie, Integer.parseInt(uri.getLastPathSegment()));
         }
         super.onInsertComplete(token, cookie, uri);
     }
