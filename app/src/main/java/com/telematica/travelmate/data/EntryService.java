@@ -123,8 +123,4 @@ public class EntryService {
         };
         task.execute();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 565b42ad4413d2bc6035d9cc001adb9224c80ce7

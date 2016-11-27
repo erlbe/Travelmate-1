@@ -78,14 +78,9 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
     }
 
     public void replaceData(List<Entry> entries) {
-<<<<<<< HEAD
         setList(entries);
         // ERLENDS VERSION TO LOAD IT FROM ONLINE DATABASE:
         // EntryService.loadAllEntries(this);
-=======
-        //setList(entries);
-        EntryService.loadAllEntries(this);
->>>>>>> 565b42ad4413d2bc6035d9cc001adb9224c80ce7
     }
 
     public void setList(List<Entry> entries) {
