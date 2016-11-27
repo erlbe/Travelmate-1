@@ -9,6 +9,7 @@ import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.model.User;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
 import com.telematica.travelmate.userinterface.entrylist.EntryListAdapter;
+import com.telematica.travelmate.utilities.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +28,7 @@ import static com.telematica.travelmate.utilities.Constants.SERVER_LINK;
 
 public class EntryService {
 
-    public static void addEntry(final Entry entry){
+    public static void addEntry(final Entry entry, final AsyncQueryListener listener){
 
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             @Override
@@ -66,6 +67,7 @@ public class EntryService {
                         e.printStackTrace();
                     }
                 }
+                listener.onInsertComplete(Constants.INSERT_ENTRY, null, null);
             }
         };
         task.execute();

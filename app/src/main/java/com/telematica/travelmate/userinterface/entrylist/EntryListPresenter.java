@@ -125,7 +125,7 @@ public class EntryListPresenter implements EntryListContract.Actions, AsyncQuery
     @Override
     public void onInsertComplete(int token, Object cookie, Uri uri) {
         if (token == Constants.INSERT_ENTRY){
-            long result = Long.parseLong(uri.getLastPathSegment());
+            long result = 1;
             if (result > 0){
                 mView.showMessage("Entry added");
                 //Refresh screen

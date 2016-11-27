@@ -62,7 +62,7 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
             mEntryRepository.addAsync(entry, this);
 
             // Erlend adds enry to API. May be unneeded.
-            // EntryService.addEntry(entry);
+            //EntryService.addEntry();
         }
 
 
@@ -134,7 +134,7 @@ public class AddEntryPresenter implements AddEntryContract.Action, AsyncQueryLis
     @Override
     public void onInsertComplete(int token, Object cookie, Uri uri) {
         if (token == Constants.INSERT_ENTRY){
-            long result = Long.parseLong(uri.getLastPathSegment());
+            long result = 1;
             if (result > 0){
                 mView.displayMessage("Entry added");
                 //Refresh screen

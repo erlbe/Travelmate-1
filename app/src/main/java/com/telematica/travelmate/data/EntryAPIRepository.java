@@ -23,7 +23,7 @@ public class EntryAPIRepository implements EntryListContract.Repository {
 
     @Override
     public void addAsync(Entry entry, AsyncQueryListener listener) {
-        EntryService.addEntry(entry);
+        EntryService.addEntry(entry, listener);
     }
 
     @Override
