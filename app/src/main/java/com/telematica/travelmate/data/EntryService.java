@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.telematica.travelmate.connection.HttpServerConnection;
+import com.telematica.travelmate.listeners.AsyncQueryListener;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.model.User;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
@@ -65,6 +66,41 @@ public class EntryService {
                         e.printStackTrace();
                     }
                 }
+            }
+        };
+        task.execute();
+    }
+
+    public static void updateEntry(final Entry entry, final AsyncQueryListener listener){
+
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+            @Override
+            protected void onPreExecute() {
+            }
+
+            @Override
+            protected String doInBackground(Void... voids) {
+                JSONObject jsonParam = new JSONObject();
+                try {
+                    jsonParam.put("title", entry.getTitle());
+                    jsonParam.put("content", entry.getContent());
+                    jsonParam.put("userId", User.getInstance().getId());
+                    System.out.println(jsonParam);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String result = new HttpServerConnection().connectToServer(SERVER_LINK + "/entry/" + entry.getId(), 15000, "PUT", jsonParam);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if(result != null){
+                    System.out.println("JSON:");
+                    System.out.println(result);
+                }
+                listener.onUpdateComplete(0, null, result.length());
             }
         };
         task.execute();

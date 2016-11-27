@@ -28,7 +28,7 @@ public class EntryAPIRepository implements EntryListContract.Repository {
 
     @Override
     public void updateAsync(Entry entry, AsyncQueryListener listener) {
-        //TODO: Implement this
+        EntryService.updateEntry(entry, listener);
         System.out.println("Update entry");
     }
 

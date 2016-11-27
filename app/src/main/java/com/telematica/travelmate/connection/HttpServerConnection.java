@@ -35,8 +35,8 @@ public class HttpServerConnection {
                 InputStream is = conn.getInputStream();
                 return readInputStream(is);
             }
-            else if(requestMethod.equals("POST")){
-                conn.setRequestMethod("POST");
+            else if(requestMethod.equals("POST") || requestMethod.equals("PUT")){
+                conn.setRequestMethod(requestMethod);
                 conn.setDoInput(true);
                 conn.setDoOutput (true);
                 conn.setRequestProperty("Content-Type", "application/json");
