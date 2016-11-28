@@ -48,7 +48,7 @@ public class EntryService {
                         jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
                     }
                     catch (JSONException e) {
-                        e.printStackTrace();
+                        // No image
                     }
                     System.out.println(jsonParam);
                 } catch (JSONException e) {
@@ -100,7 +100,7 @@ public class EntryService {
                         jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
                     }
                     catch (JSONException e) {
-                        e.printStackTrace();
+                        // No image
                     }
                     System.out.println(jsonParam);
                 } catch (JSONException e) {
@@ -163,7 +163,7 @@ public class EntryService {
                                 newEntry.setImage(image);
                             }
                             catch (JSONException e) {
-                                e.printStackTrace();
+                                // No image
                             }
 
                             //FIXME: Implement date modified backend
