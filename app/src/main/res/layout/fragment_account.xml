@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="13sp"
-        android:id="@+id/textView"
+        android:id="@+id/usernameTextView"
         android:textColor="@color/icons"
         android:layout_below="@+id/image_view_account_logo"
         android:layout_alignLeft="@+id/image_view_account_logo"
