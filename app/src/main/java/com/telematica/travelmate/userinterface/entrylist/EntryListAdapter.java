@@ -86,9 +86,14 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
     }
 
     public void replaceData(List<Entry> entries) {
-        //setList(entries);
-        // ERLENDS VERSION TO LOAD IT FROM ONLINE DATABASE:
-        EntryService.loadAllEntries(this);
+        if(Constants.DB_TYPE.equals("SQLite")){
+            // ANDREAS VERSION TO LOAD IT LOCAL FROM SQLite DATABASE
+            setList(entries);
+        }
+        else if(Constants.DB_TYPE.equals("API")){
+            // ERLENDS VERSION TO LOAD IT FROM ONLINE DATABASE:
+            EntryService.loadAllEntries(this);
+        }
     }
 
     public List<Entry> getAllEntries() {
@@ -97,9 +102,6 @@ public class EntryListAdapter extends RecyclerView.Adapter<EntryListAdapter.View
 
     public void setList(List<Entry> entries) {
         mEntries = entries;
-        System.out.println("Entries changed!!!");
-        System.out.println(entries);
-
         notifyDataSetChanged();
     }
 

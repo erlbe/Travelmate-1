@@ -48,4 +48,4 @@ require('./app/routes/api.js')(router, passport);
 
 // launch ======================================================================
 app.listen(port);
-console.log('The magic happens on ' + ip.address() +':'+ port);
+console.log('The API is listening on: '+ ip.address() +':'+ port + "/api");
