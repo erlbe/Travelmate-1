@@ -2,6 +2,7 @@ package com.telematica.travelmate.data;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Base64;
 
 import com.telematica.travelmate.connection.HttpServerConnection;
 import com.telematica.travelmate.listeners.AsyncQueryListener;
@@ -42,6 +43,13 @@ public class EntryService {
                     jsonParam.put("title", entry.getTitle());
                     jsonParam.put("content", entry.getContent());
                     jsonParam.put("userId", User.getInstance().getId());
+                    // Handle if there is no image
+                    try{
+                        jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println(jsonParam);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -88,6 +96,12 @@ public class EntryService {
                     jsonParam.put("title", entry.getTitle());
                     jsonParam.put("content", entry.getContent());
                     jsonParam.put("userId", User.getInstance().getId());
+                    try{
+                        jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println(jsonParam);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,6 +156,15 @@ public class EntryService {
                             Long id = jEntry.getLong("_id");
                             String title = jEntry.getString("title");
                             String content = jEntry.getString("content");
+
+                            // Handle if there is no image
+                            try{
+                                byte[] image = Base64.decode(jEntry.getString("image"), Base64.DEFAULT);
+                                newEntry.setImage(image);
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
                             //FIXME: Implement date modified backend
                             Long dateModified = GregorianCalendar.getInstance().getTimeInMillis();

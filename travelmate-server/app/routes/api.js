@@ -51,8 +51,8 @@ module.exports = function(router, passport) {
         entry._id = generateId();
         entry.title = req.body.title;
         entry.content = req.body.content;
-        // TODO: Get this from logged user instead
         entry._creator = req.body.userId;
+        entry.image = req.body.image;
 
         // TODO: Add category
 
@@ -83,6 +83,7 @@ module.exports = function(router, passport) {
             entry.title = req.body.title;
             entry.content = req.body.content;
             entry._creator = req.body.userId;
+            entry.image = req.body.image;
 
             // save the entry
             entry.save(function(err) {

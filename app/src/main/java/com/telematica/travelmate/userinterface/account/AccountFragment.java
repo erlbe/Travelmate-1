@@ -23,8 +23,8 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        userNameTextView = (TextView) view.findViewById(R.id.usernameTextView);
-        userNameTextView.setText(User.getInstance().getName());
+        //userNameTextView = (TextView) view.findViewById(R.id.usernameTextView);
+        //userNameTextView.setText(User.getInstance().getName());
         return view;
     }
 
