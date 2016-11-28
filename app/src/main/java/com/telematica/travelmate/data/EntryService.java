@@ -43,6 +43,7 @@ public class EntryService {
                     jsonParam.put("title", entry.getTitle());
                     jsonParam.put("content", entry.getContent());
                     jsonParam.put("userId", User.getInstance().getId());
+                    jsonParam.put("category", entry.getCategoryName());
                     // Handle if there is no image
                     try{
                         jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
@@ -96,6 +97,7 @@ public class EntryService {
                     jsonParam.put("title", entry.getTitle());
                     jsonParam.put("content", entry.getContent());
                     jsonParam.put("userId", User.getInstance().getId());
+                    jsonParam.put("category", entry.getCategoryName());
                     try{
                         jsonParam.put("image", Base64.encodeToString(entry.getImage(), Base64.DEFAULT));
                     }
@@ -156,8 +158,7 @@ public class EntryService {
                             Long id = jEntry.getLong("_id");
                             String title = jEntry.getString("title");
                             String content = jEntry.getString("content");
-
-                            // Handle if there is no image
+                            String categoryName = jEntry.getString("category");
                             try{
                                 byte[] image = Base64.decode(jEntry.getString("image"), Base64.DEFAULT);
                                 newEntry.setImage(image);
@@ -168,8 +169,6 @@ public class EntryService {
 
                             //FIXME: Implement date modified backend
                             Long dateModified = GregorianCalendar.getInstance().getTimeInMillis();
-                            //FIXME: Implement categories backend
-                            String categoryName = "General";
 
                             newEntry.setId(id);
                             newEntry.setTitle(title);

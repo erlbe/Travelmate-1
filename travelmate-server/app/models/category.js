@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 
 var categorySchema = mongoose.Schema({
+        _id: Number,
         _creator : { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         title: String
     }

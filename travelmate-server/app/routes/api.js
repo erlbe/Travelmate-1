@@ -53,6 +53,7 @@ module.exports = function(router, passport) {
         entry.content = req.body.content;
         entry._creator = req.body.userId;
         entry.image = req.body.image;
+        entry.category = req.body.category;
 
         // TODO: Add category
 
@@ -84,6 +85,8 @@ module.exports = function(router, passport) {
             entry.content = req.body.content;
             entry._creator = req.body.userId;
             entry.image = req.body.image;
+            entry.category = req.body.category;
+
 
             // save the entry
             entry.save(function(err) {
