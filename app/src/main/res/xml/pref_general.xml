@@ -13,11 +13,6 @@
             android:key="prompt_for_delete"
             android:summary="Activate to prompt for delete confirmation"
             android:defaultValue="true"/>
-        <SwitchPreference
-            android:title="Set Language"
-            android:key="set_language"
-            android:summary="Activate to use Spanish Language"
-            android:defaultValue="false"/>
     </PreferenceCategory>
 
 

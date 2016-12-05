@@ -96,7 +96,7 @@ public class EntryListActivity extends AppCompatActivity {
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Entries").withIcon(FontAwesome.Icon.faw_sticky_note).withIdentifier(Constants.ENTRY),
                         new PrimaryDrawerItem().withName("Categories").withIcon(FontAwesome.Icon.faw_folder).withIdentifier(Constants.CATEGORY),
-                        new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(Constants.ACCOUNT),
+                        //new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(Constants.ACCOUNT),
                         new PrimaryDrawerItem().withName("Save to SD Card").withIcon(FontAwesome.Icon.faw_download).withIdentifier(Constants.BACKUP),
                         new PrimaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog).withIdentifier(Constants.SETTINGS),
                         new PrimaryDrawerItem().withName("Database").withIcon(FontAwesome.Icon.faw_table).withIdentifier(Constants.TABLE)

@@ -10,6 +10,7 @@ import com.telematica.travelmate.listeners.AsyncQueryListener;
 import com.telematica.travelmate.listeners.OnDatabaseOperationCompleteListener;
 import com.telematica.travelmate.model.Entry;
 import com.telematica.travelmate.userinterface.entrylist.EntryListActivity;
+import com.telematica.travelmate.userinterface.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class AddSampleDateIntentService extends IntentService {
 
         //Once the data is added, simply restart the Entrylist
         //Activity so the default data will be displayed
-        Intent restartIntent = new Intent(this, EntryListActivity.class);
+        Intent restartIntent = new Intent(this, LoginActivity.class);
         restartIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(restartIntent);
 
